@@ -1,0 +1,24 @@
+name: Tour Check
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Confirm tour files
+        run: |
+          test -f README.md
+          test -f README.ja.md
+          test -f README.en.md
+          test -f hello.txt
+          echo "Tour files are ready."
